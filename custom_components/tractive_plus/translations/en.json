@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tractive Plus",
+        "description": "Adds the Tractive data that is missing from the official integration. The Tractive integration must already be configured and loaded."
+      }
+    },
+    "abort": {
+      "already_configured": "Tractive Plus is already configured."
+    }
+  }
+}

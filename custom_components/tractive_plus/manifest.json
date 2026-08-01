@@ -1,0 +1,12 @@
+{
+  "domain": "tractive_plus",
+  "name": "Tractive Plus",
+  "codeowners": ["@Dujonkev"],
+  "config_flow": true,
+  "dependencies": ["tractive"],
+  "documentation": "https://github.com/Dujonkev/tractive-plus",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Dujonkev/tractive-plus/issues",
+  "version": "0.1.0"
+}

@@ -1,0 +1,17 @@
+probe:
+  name: Sonder l'API Tractive
+  description: Appelle un endpoint Tractive arbitraire et renvoie la reponse JSON.
+  fields:
+    path:
+      name: Chemin
+      description: "Exemple: pet/<pet_id>/health/overview"
+      required: true
+      example: "pet/62a8958f6bd262916d6cc959/health/overview"
+      selector:
+        text:
+    aps:
+      name: API APS
+      description: Utiliser aps-api.tractive.com au lieu de graph.tractive.com
+      default: false
+      selector:
+        boolean:
