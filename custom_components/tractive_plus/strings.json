@@ -9,5 +9,128 @@
     "abort": {
       "already_configured": "Tractive Plus is already configured."
     }
+  },
+  "entity": {
+    "sensor": {
+      "altitude": {
+        "name": "Altitude"
+      },
+      "position_accuracy": {
+        "name": "Position accuracy"
+      },
+      "sensor_used": {
+        "name": "Position source"
+      },
+      "position_time": {
+        "name": "Last position"
+      },
+      "speed": {
+        "name": "Speed"
+      },
+      "course": {
+        "name": "Course"
+      },
+      "battery_state": {
+        "name": "Battery state"
+      },
+      "state_reason": {
+        "name": "State reason"
+      },
+      "hw_status": {
+        "name": "Hardware status"
+      },
+      "hw_report_time": {
+        "name": "Last hardware report"
+      },
+      "clip_mounted_state": {
+        "name": "Clip state"
+      },
+      "temperature_state": {
+        "name": "Temperature state"
+      },
+      "fw_version": {
+        "name": "Firmware version"
+      },
+      "hw_edition": {
+        "name": "Hardware edition"
+      },
+      "battery_save_mode": {
+        "name": "Battery save mode"
+      },
+      "geofence_sensitivity": {
+        "name": "Geofence sensitivity"
+      },
+      "zone_name": {
+        "name": "Power saving zone"
+      },
+      "zone_type": {
+        "name": "Priority zone type"
+      },
+      "zone_entered_at": {
+        "name": "Priority zone since"
+      },
+      "zone_last_seen_at": {
+        "name": "Priority zone last seen"
+      },
+      "subscription_status": {
+        "name": "Subscription status"
+      },
+      "subscription_end": {
+        "name": "Subscription end"
+      },
+      "subscription_plan": {
+        "name": "Subscription plan"
+      },
+      "subscription_interval": {
+        "name": "Billing interval"
+      },
+      "resting_heart_rate_status": {
+        "name": "Resting heart rate"
+      },
+      "resting_respiratory_rate_status": {
+        "name": "Resting respiratory rate"
+      },
+      "bark_status": {
+        "name": "Barking"
+      },
+      "scratch_status": {
+        "name": "Scratching"
+      },
+      "health_alerts": {
+        "name": "Health alerts"
+      },
+      "activity_goal_progress": {
+        "name": "Activity goal progress"
+      },
+      "sleep_total": {
+        "name": "Total sleep"
+      },
+      "activity_current_hour": {
+        "name": "Current hour activity"
+      },
+      "activity_synced_at": {
+        "name": "Last activity sync"
+      },
+      "daily_distance_goal": {
+        "name": "Daily distance goal"
+      },
+      "daily_points_goal": {
+        "name": "Daily points goal"
+      }
+    },
+    "binary_sensor": {
+      "in_power_saving_zone": {
+        "name": "In power saving zone"
+      },
+      "insurance_active": {
+        "name": "Insurance active"
+      },
+      "subscription_recurring": {
+        "name": "Subscription recurring"
+      },
+      "separation_phase": {
+        "name": "Separation phase"
+      }
+    }
   }
 }

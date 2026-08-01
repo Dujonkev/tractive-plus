@@ -33,20 +33,20 @@ class TPBinaryDescription(BinarySensorEntityDescription):
 TRACKER_BINARY: tuple[TPBinaryDescription, ...] = (
     TPBinaryDescription(
         key="in_power_saving_zone",
-        name="Dans la zone d'economie d'energie",
+        translation_key="in_power_saving_zone",
         icon="mdi:home-map-marker",
         value_fn=lambda d: bool(d["pos"].get("power_saving_zone_id")),
     ),
     TPBinaryDescription(
         key="insurance_active",
-        name="Assurance active",
+        translation_key="insurance_active",
         entity_category=EntityCategory.DIAGNOSTIC,
         icon="mdi:shield-check",
         value_fn=lambda d: d["subscription"].get("insurance_active"),
     ),
     TPBinaryDescription(
         key="subscription_recurring",
-        name="Abonnement reconductible",
+        translation_key="subscription_recurring",
         entity_category=EntityCategory.DIAGNOSTIC,
         icon="mdi:autorenew",
         value_fn=lambda d: d["subscription"].get("recurring"),
@@ -56,7 +56,7 @@ TRACKER_BINARY: tuple[TPBinaryDescription, ...] = (
 PET_BINARY: tuple[TPBinaryDescription, ...] = (
     TPBinaryDescription(
         key="separation_phase",
-        name="Phase de separation en cours",
+        translation_key="separation_phase",
         icon="mdi:account-arrow-right",
         value_fn=lambda d: (
             (d.get("overview") or {}).get("separationPhaseStatus") or {}

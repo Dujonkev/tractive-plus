@@ -3,11 +3,134 @@
     "step": {
       "user": {
         "title": "Tractive Plus",
-        "description": "Ajoute les donnees Tractive absentes de l'integration officielle. L'integration Tractive doit deja etre configuree et chargee."
+        "description": "Ajoute les données Tractive absentes de l'intégration officielle. L'intégration Tractive doit déjà être configurée et chargée."
       }
     },
     "abort": {
-      "already_configured": "Tractive Plus est deja configure."
+      "already_configured": "Tractive Plus est déjà configuré."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "altitude": {
+        "name": "Altitude"
+      },
+      "position_accuracy": {
+        "name": "Précision de la position"
+      },
+      "sensor_used": {
+        "name": "Source de position"
+      },
+      "position_time": {
+        "name": "Dernière position"
+      },
+      "speed": {
+        "name": "Vitesse"
+      },
+      "course": {
+        "name": "Cap"
+      },
+      "battery_state": {
+        "name": "État de la batterie"
+      },
+      "state_reason": {
+        "name": "Raison de l'état"
+      },
+      "hw_status": {
+        "name": "Statut matériel"
+      },
+      "hw_report_time": {
+        "name": "Dernier rapport matériel"
+      },
+      "clip_mounted_state": {
+        "name": "État du clip"
+      },
+      "temperature_state": {
+        "name": "État de température"
+      },
+      "fw_version": {
+        "name": "Version du firmware"
+      },
+      "hw_edition": {
+        "name": "Édition matérielle"
+      },
+      "battery_save_mode": {
+        "name": "Mode économie de batterie"
+      },
+      "geofence_sensitivity": {
+        "name": "Sensibilité des clôtures"
+      },
+      "zone_name": {
+        "name": "Zone d'économie d'énergie"
+      },
+      "zone_type": {
+        "name": "Type de zone prioritaire"
+      },
+      "zone_entered_at": {
+        "name": "Zone prioritaire depuis"
+      },
+      "zone_last_seen_at": {
+        "name": "Zone prioritaire vue le"
+      },
+      "subscription_status": {
+        "name": "Statut de l'abonnement"
+      },
+      "subscription_end": {
+        "name": "Fin d'abonnement"
+      },
+      "subscription_plan": {
+        "name": "Formule d'abonnement"
+      },
+      "subscription_interval": {
+        "name": "Périodicité de facturation"
+      },
+      "resting_heart_rate_status": {
+        "name": "Fréquence cardiaque au repos"
+      },
+      "resting_respiratory_rate_status": {
+        "name": "Fréquence respiratoire au repos"
+      },
+      "bark_status": {
+        "name": "Aboiements"
+      },
+      "scratch_status": {
+        "name": "Grattage"
+      },
+      "health_alerts": {
+        "name": "Alertes santé"
+      },
+      "activity_goal_progress": {
+        "name": "Progression de l'objectif d'activité"
+      },
+      "sleep_total": {
+        "name": "Sommeil total"
+      },
+      "activity_current_hour": {
+        "name": "Activité de l'heure en cours"
+      },
+      "activity_synced_at": {
+        "name": "Dernière synchronisation d'activité"
+      },
+      "daily_distance_goal": {
+        "name": "Objectif quotidien de distance"
+      },
+      "daily_points_goal": {
+        "name": "Objectif quotidien de points"
+      }
+    },
+    "binary_sensor": {
+      "in_power_saving_zone": {
+        "name": "Dans une zone d'économie d'énergie"
+      },
+      "insurance_active": {
+        "name": "Assurance active"
+      },
+      "subscription_recurring": {
+        "name": "Abonnement reconductible"
+      },
+      "separation_phase": {
+        "name": "Phase de séparation"
+      }
     }
   }
 }

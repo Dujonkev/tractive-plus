@@ -17,7 +17,8 @@ des données renvoyées par l'API : position, batterie et quelques compteurs d'a
 
 **Tractive Plus** vient la compléter : elle réutilise la session déjà ouverte par
 l'intégration officielle (aucun identifiant supplémentaire à saisir) et publie une
-trentaine d'entités additionnelles pour chaque tracker et chaque animal.
+trentaine d'entités additionnelles pour chaque tracker et chaque animal,
+traduites en français et en anglais.
 
 ## Fonctionnalités
 
@@ -44,7 +45,7 @@ Tractive et renvoie la réponse JSON, pratique pour explorer de nouvelles donné
 
 ## Prérequis
 
-- Home Assistant 2024.12 ou plus récent
+- Home Assistant 2024.12 ou plus récent (2026.3+ pour l'affichage du logo)
 - L'intégration officielle **Tractive** installée, configurée et chargée
 - Un tracker Tractive avec un abonnement actif
 
@@ -98,9 +99,10 @@ logger:
 
 ## Contribuer
 
-Les issues et les pull requests sont bienvenues. Les noms d'entités sont pour
-l'instant en français côté code ; une bascule complète vers les `translation_key`
-est prévue.
+Les issues et les pull requests sont bienvenues. Les entités reposent sur des
+`translation_key` et leurs libellés vivent dans
+`custom_components/tractive_plus/translations/` : ajouter une langue revient à
+déposer un fichier `<code_langue>.json` sur le modèle de `fr.json`.
 
 ## Avertissement
 
