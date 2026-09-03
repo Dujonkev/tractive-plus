@@ -34,11 +34,19 @@ PARALLEL_UPDATES = 0
 
 
 def _ts(value: Any) -> datetime | None:
-    """Convertit un timestamp epoch ou ISO en datetime aware."""
+    """Convertit un timestamp epoch ou ISO en datetime aware (UTC par défaut)."""
     if value in (None, 0, ""):
         return None
     if isinstance(value, str):
-        return dt_util.parse_datetime(value)
+        parsed = dt_util.parse_datetime(value)
+        if parsed is None:
+            return None
+        # `SensorDeviceClass.TIMESTAMP` exige un datetime "aware" : si l'API
+        # renvoie un jour une chaîne ISO sans fuseau, on la traite comme UTC
+        # plutôt que de laisser fuiter un datetime naïf vers Home Assistant.
+        if parsed.tzinfo is None:
+            return dt_util.as_utc(parsed)
+        return parsed
     return dt_util.utc_from_timestamp(int(value))
 
 

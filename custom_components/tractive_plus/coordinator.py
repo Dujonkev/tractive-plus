@@ -82,15 +82,25 @@ class TractivePlusCoordinator(DataUpdateCoordinator[dict[str, Any]]):
 
     async def _async_update_data(self) -> dict[str, Any]:
         _api, tdata = resolve_tractive(self.hass)
-        user_id = tdata.client.user_id
+        try:
+            user_id = tdata.client.user_id
+        except AttributeError as err:
+            raise UpdateFailed(f"Session Tractive indisponible : {err}") from err
+
         slow = self._cycle % SLOW_EVERY == 0
         self._cycle += 1
 
         out: dict[str, Any] = {"trackers": {}, "pets": {}}
 
         for item in tdata.trackables:
-            tracker_id = item.tracker_details["_id"]
-            pet_id = item.trackable["_id"]
+            try:
+                tracker_id = item.tracker_details["_id"]
+                pet_id = item.trackable["_id"]
+            except (KeyError, AttributeError, TypeError) as err:
+                _LOGGER.debug(
+                    "Trackable Tractive incomplet, ignoré pour ce cycle : %s", err
+                )
+                continue
 
             if slow or "details_%s" % tracker_id not in self._cache:
                 await self._slow_tracker_data(tracker_id, user_id)
