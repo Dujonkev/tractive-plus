@@ -11,7 +11,7 @@ from homeassistant.components.binary_sensor import (
     BinarySensorEntityDescription,
 )
 from homeassistant.const import EntityCategory
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -73,21 +73,42 @@ async def async_setup_entry(
     """Ajoute les binary sensors Tractive Plus."""
     coordinator = entry.runtime_data
     entities: list[BinarySensorEntity] = []
+    known_geofences: set[tuple[str, str]] = set()
+
     for tracker_id, tdata in coordinator.data["trackers"].items():
         entities.extend(
             TractivePlusBinarySensor(coordinator, "trackers", tracker_id, desc)
             for desc in TRACKER_BINARY
         )
-        entities.extend(
-            TractiveGeofenceBinarySensor(coordinator, tracker_id, gid, gdata)
-            for gid, gdata in (tdata.get("geofences") or {}).items()
-        )
+        for gid, gdata in (tdata.get("geofences") or {}).items():
+            entities.append(
+                TractiveGeofenceBinarySensor(coordinator, tracker_id, gid, gdata)
+            )
+            known_geofences.add((tracker_id, gid))
     for pet_id in coordinator.data["pets"]:
         entities.extend(
             TractivePlusBinarySensor(coordinator, "pets", pet_id, desc)
             for desc in PET_BINARY
         )
     async_add_entities(entities)
+
+    @callback
+    def _add_new_geofences() -> None:
+        """Cree les entites des clotures decouvertes apres la configuration initiale."""
+        new_entities: list[BinarySensorEntity] = []
+        for tracker_id, tdata in (coordinator.data or {}).get("trackers", {}).items():
+            for gid, gdata in (tdata.get("geofences") or {}).items():
+                key = (tracker_id, gid)
+                if key in known_geofences:
+                    continue
+                known_geofences.add(key)
+                new_entities.append(
+                    TractiveGeofenceBinarySensor(coordinator, tracker_id, gid, gdata)
+                )
+        if new_entities:
+            async_add_entities(new_entities)
+
+    entry.async_on_unload(coordinator.async_add_listener(_add_new_geofences))
 
 
 class TractivePlusBinarySensor(
