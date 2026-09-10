@@ -86,6 +86,9 @@ au niveau `info`.
 
 Une carte complete pour visualiser un animal (activite, bien-etre, tracker, historique) peut etre construite avec la carte tierce custom:ultra-card (a installer separement via HACS, voir https://github.com/WJDDesigns/Ultra-Card). Remplacez les identifiants d'entites par les votres avant de l'utiliser.
 
+![Exemple de dashboard Tractive Plus](dashboard-example.png)
+
+
 ```yaml
 type: custom:ultra-card
 _config_version: 2
