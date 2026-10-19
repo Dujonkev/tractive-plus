@@ -12,6 +12,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, ServiceCall, SupportsResponse
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers.service import async_register_admin_service
 
 from .const import DOMAIN
 from .coordinator import TractivePlusCoordinator
@@ -48,10 +49,12 @@ async def async_setup_entry(
             raise HomeAssistantError(
                 f"Appel à l'endpoint Tractive « {path} » impossible : {err}"
             ) from err
-        _LOGGER.info("Tractive Plus probe %s -> %s", path, result)
         return {"result": result}
 
-    hass.services.async_register(
+    # Service reserve aux administrateurs : il utilise la session Tractive
+    # authentifiee du proprietaire. La reponse n'est jamais journalisee.
+    async_register_admin_service(
+        hass,
         DOMAIN,
         "probe",
         _probe,
