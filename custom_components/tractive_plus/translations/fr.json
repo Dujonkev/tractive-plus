@@ -3,11 +3,30 @@
     "step": {
       "user": {
         "title": "Tractive Plus",
-        "description": "Ajoute les données Tractive absentes de l'intégration officielle. L'intégration Tractive doit déjà être configurée et chargée."
+        "description": "Connectez-vous avec votre compte Tractive. Tractive Plus utilise sa propre session et fonctionne indépendamment de l'intégration Tractive officielle.",
+        "data": {
+          "email": "E-mail",
+          "password": "Mot de passe"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Tractive Plus",
+        "description": "Saisissez à nouveau vos identifiants Tractive (nécessaire après une mise à jour ou un changement de mot de passe).",
+        "data": {
+          "email": "E-mail",
+          "password": "Mot de passe"
+        }
       }
     },
+    "error": {
+      "invalid_auth": "E-mail ou mot de passe incorrect.",
+      "cannot_connect": "Impossible de joindre Tractive.",
+      "unknown": "Erreur inattendue."
+    },
     "abort": {
-      "already_configured": "Tractive Plus est déjà configuré."
+      "already_configured": "Ce compte Tractive est déjà configuré.",
+      "reauth_successful": "Identifiants mis à jour.",
+      "unique_id_mismatch": "Ce n'est pas le compte Tractive configuré initialement."
     }
   },
   "entity": {
@@ -130,6 +149,26 @@
       },
       "separation_phase": {
         "name": "Phase de séparation"
+      }
+    }
+  },
+  "services": {
+    "probe": {
+      "name": "Sonder l'API Tractive",
+      "description": "Appelle un endpoint Tractive avec la session Tractive Plus et renvoie la réponse JSON (administrateurs uniquement).",
+      "fields": {
+        "path": {
+          "name": "Chemin",
+          "description": "Exemple : pet/<pet_id>/health/overview"
+        },
+        "aps": {
+          "name": "API APS",
+          "description": "Utiliser aps-api.tractive.com au lieu de graph.tractive.com"
+        },
+        "config_entry_id": {
+          "name": "Entrée",
+          "description": "Entrée Tractive Plus à utiliser (facultatif, la première par défaut)"
+        }
       }
     }
   }
