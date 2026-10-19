@@ -3,11 +3,30 @@
     "step": {
       "user": {
         "title": "Tractive Plus",
-        "description": "Adds the Tractive data that is missing from the official integration. The Tractive integration must already be configured and loaded."
+        "description": "Sign in with your Tractive account. Tractive Plus uses its own session and works independently of the official Tractive integration.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Tractive Plus",
+        "description": "Enter your Tractive credentials again (required after an update or when the password changed).",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
       }
     },
+    "error": {
+      "invalid_auth": "Invalid email or password.",
+      "cannot_connect": "Unable to reach Tractive.",
+      "unknown": "Unexpected error."
+    },
     "abort": {
-      "already_configured": "Tractive Plus is already configured."
+      "already_configured": "This Tractive account is already configured.",
+      "reauth_successful": "Credentials updated.",
+      "unique_id_mismatch": "This is not the Tractive account that was configured."
     }
   },
   "entity": {
@@ -130,6 +149,26 @@
       },
       "separation_phase": {
         "name": "Separation phase"
+      }
+    }
+  },
+  "services": {
+    "probe": {
+      "name": "Probe Tractive API",
+      "description": "Calls a Tractive endpoint with the Tractive Plus session and returns the JSON response (admin only).",
+      "fields": {
+        "path": {
+          "name": "Path",
+          "description": "Example: pet/<pet_id>/health/overview"
+        },
+        "aps": {
+          "name": "APS API",
+          "description": "Use aps-api.tractive.com instead of graph.tractive.com"
+        },
+        "config_entry_id": {
+          "name": "Config entry",
+          "description": "Tractive Plus entry to use (optional, first one by default)"
+        }
       }
     }
   }
