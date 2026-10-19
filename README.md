@@ -15,10 +15,11 @@
 L'intégration officielle **Tractive** de Home Assistant n'expose qu'une petite partie
 des données renvoyées par l'API : position, batterie et quelques compteurs d'activité.
 
-**Tractive Plus** vient la compléter : elle réutilise la session déjà ouverte par
-l'intégration officielle (aucun identifiant supplémentaire à saisir) et publie une
+**Tractive Plus** vient la compléter : elle se connecte à votre compte Tractive avec
+sa propre session (indépendante de l'intégration officielle) et publie une
 trentaine d'entités additionnelles pour chaque tracker et chaque animal,
-traduites en français et en anglais.
+traduites en français et en anglais. Les deux intégrations peuvent fonctionner
+côte à côte.
 
 ## Fonctionnalités
 
@@ -40,13 +41,14 @@ objectifs quotidiens de distance et de points.
 **Capteurs binaires (4)** : présence dans une zone d'économie d'énergie, assurance
 active, abonnement reconductible, phase de séparation.
 
-**Service `tractive_plus.probe`** : interroge n'importe quel endpoint de l'API
-Tractive et renvoie la réponse JSON, pratique pour explorer de nouvelles données.
+**Service `tractive_plus.probe`** (réservé aux administrateurs) : interroge un
+endpoint de l'API Tractive et renvoie la réponse JSON, pratique pour explorer de
+nouvelles données.
 
 ## Prérequis
 
-- Home Assistant 2024.12 ou plus récent (2026.3+ pour l'affichage du logo)
-- L'intégration officielle **Tractive** installée, configurée et chargée
+- Home Assistant 2025.2 ou plus récent (2026.3+ pour l'affichage du logo)
+- Un compte Tractive (e-mail et mot de passe)
 - Un tracker Tractive avec un abonnement actif
 
 ## Installation
@@ -66,9 +68,15 @@ l'intégration.
 
 ## Configuration
 
-Aucune. Le flux de configuration ne demande rien : l'intégration récupère la session
-Tractive existante. Les données sont rafraîchies toutes les 2 minutes (les endpoints
-lents, santé et abonnement, sont interrogés moins souvent).
+Le flux de configuration demande l'e-mail et le mot de passe de votre compte
+Tractive. Si le mot de passe change, Home Assistant vous propose de le ressaisir
+(réauthentification). Chaque tracker apparaît comme un appareil **Tractive Plus**
+portant le nom de l'animal. Les données sont rafraîchies toutes les 2 minutes (les
+endpoints lents, santé et abonnement, sont interrogés moins souvent).
+
+> **Mise à jour depuis une version < 0.3.0** : après la mise à jour, Home Assistant
+> signale que Tractive Plus doit être réauthentifié. Saisissez vos identifiants
+> Tractive : vos entités et leur historique sont conservés.
 
 ## Exemple : service probe
 
@@ -79,8 +87,9 @@ data:
   aps: false
 ```
 
-La réponse JSON est renvoyée dans la variable de réponse de l'action et journalisée
-au niveau `info`.
+La réponse JSON est renvoyée uniquement dans la variable de réponse de l'action ;
+elle n'est jamais écrite dans les journaux. L'action est réservée aux
+administrateurs.
 
 ## Exemple de dashboard (Lovelace)
 
@@ -1006,8 +1015,8 @@ card_mod:
 
 ## Dépannage
 
-- **L'intégration ne se charge pas** : vérifiez que l'intégration officielle Tractive
-  est bien chargée, Tractive Plus en dépend.
+- **L'intégration ne se charge pas** : vérifiez vos identifiants Tractive (une
+  réauthentification est proposée dans **Paramètres → Appareils et services**).
 - **Des capteurs sont indisponibles** : tous les champs ne sont pas renvoyés par tous
   les modèles de tracker ni tous les abonnements.
 - **Journaux détaillés** :

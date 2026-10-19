@@ -21,13 +21,11 @@ from homeassistant.const import (
     UnitOfTime,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.util import dt as dt_util
 
 from . import TractivePlusConfigEntry
-from .const import TRACTIVE_DOMAIN
 from .coordinator import TractivePlusCoordinator
 
 PARALLEL_UPDATES = 0
@@ -365,7 +363,7 @@ async def async_setup_entry(
 
 
 class TractivePlusSensor(CoordinatorEntity[TractivePlusCoordinator], SensorEntity):
-    """Capteur rattache aux appareils Tractive existants."""
+    """Capteur Tractive Plus."""
 
     _attr_has_entity_name = True
     entity_description: TPSensorDescription
@@ -383,7 +381,11 @@ class TractivePlusSensor(CoordinatorEntity[TractivePlusCoordinator], SensorEntit
         self._obj_id = obj_id
         self.entity_description = description
         self._attr_unique_id = "%s_plus_%s" % (obj_id, description.key)
-        self._attr_device_info = DeviceInfo(identifiers={(TRACTIVE_DOMAIN, obj_id)})
+        tracker_id = (
+            obj_id if kind == "trackers" else coordinator.pet_tracker_id(obj_id)
+        )
+        if tracker_id:
+            self._attr_device_info = coordinator.device_info(tracker_id)
 
     @property
     def _obj(self) -> dict[str, Any]:

@@ -12,12 +12,10 @@ from homeassistant.components.binary_sensor import (
 )
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import TractivePlusConfigEntry
-from .const import TRACTIVE_DOMAIN
 from .coordinator import TractivePlusCoordinator
 
 PARALLEL_UPDATES = 0
@@ -132,7 +130,11 @@ class TractivePlusBinarySensor(
         self._obj_id = obj_id
         self.entity_description = description
         self._attr_unique_id = "%s_plus_%s" % (obj_id, description.key)
-        self._attr_device_info = DeviceInfo(identifiers={(TRACTIVE_DOMAIN, obj_id)})
+        tracker_id = (
+            obj_id if kind == "trackers" else coordinator.pet_tracker_id(obj_id)
+        )
+        if tracker_id:
+            self._attr_device_info = coordinator.device_info(tracker_id)
 
     @property
     def is_on(self) -> bool | None:
@@ -167,9 +169,7 @@ class TractiveGeofenceBinarySensor(
         name = (geofence.get("name") or geofence_id).strip()
         self._attr_name = "Zone %s" % name
         self._attr_unique_id = "%s_plus_geofence_%s" % (tracker_id, geofence_id)
-        self._attr_device_info = DeviceInfo(
-            identifiers={(TRACTIVE_DOMAIN, tracker_id)}
-        )
+        self._attr_device_info = coordinator.device_info(tracker_id)
 
     @property
     def _geofence(self) -> dict[str, Any]:
