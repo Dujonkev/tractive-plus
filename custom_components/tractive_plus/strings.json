@@ -159,7 +159,7 @@
       "fields": {
         "path": {
           "name": "Path",
-          "description": "Example: pet/<pet_id>/health/overview"
+          "description": "Example: pet/PET_ID/health/overview"
         },
         "aps": {
           "name": "APS API",
